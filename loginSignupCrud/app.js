@@ -3,11 +3,13 @@ if (process.env.NODE_ !== "production") {
   require("dotenv").config();
 }
 require("dotenv").config();
+debugger
 const jwt = require('jsonwebtoken');
-const express = require('express')
-const app = express();
+const express = require('express');
 const my_routes = require("./src/routes")
-const mongoose = require('mongoose')
+const app = express();
+// const my_routes = require("./src/routes")
+// const mongoose = require('mongoose')
 require("./src/config/database")
 const bodyParser = require("body-parser");
 app.use(express.json());
