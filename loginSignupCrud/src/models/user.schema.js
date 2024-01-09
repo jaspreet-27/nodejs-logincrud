@@ -16,7 +16,7 @@ const myScema = new mongoose.Schema(
     role: {
       type: String,
       enum: ["admin", "editor"],
-      default: "editor",
+      default: "editor",  
     },
     deviceType: { type: String, default: null },
     token: { type: String, default: null },

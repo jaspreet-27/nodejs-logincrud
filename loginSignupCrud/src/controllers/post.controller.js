@@ -1,6 +1,4 @@
-
-const postService = require('../services/post.service');
-
+const postService = require("../services/post.service");
 
 const createPost = async (req, res) => {
   const userId = req.params.id; // Assuming userId is in req.params
@@ -9,19 +7,17 @@ const createPost = async (req, res) => {
       title: req.body.title,
       content: req.body.content,
       slug: req.body.slug,
-      userId: userId // Assigning the userId to the post being created
+      userId: userId, // Assigning the userId to the post being created
     };
 
     const newPost = await postService.createPost(postData); // Pass postData to createPost function
-    res.status(201).json({ message: 'Post created successfully', post: newPost });
+    res
+      .status(201)
+      .json({ message: "Post created successfully", post: newPost });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
-
-
-
-
 const getAllPosts = async (req, res) => {
   try {
     const posts = await postService.getAllPosts();
@@ -36,8 +32,10 @@ const updatePost = async (req, res) => {
   const newData = req.body;
 
   try {
-    const updatedPost = await postService.updatePost(postId, newData);
-    res.status(200).json({ message: 'Post updated successfully', post: updatedPost });
+    const updatedPost = await postService.updatePostById(postId, newData);
+    res
+      .status(200)
+      .json({ message: "Post updated successfully", post: updatedPost });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -47,8 +45,8 @@ const deletePost = async (req, res) => {
   const postId = req.params.id;
 
   try {
-    await postService.deletePost(postId);
-    res.status(200).json({ message: 'Post deleted successfully' });
+    await postService.deletePostById(postId);
+    res.status(200).json({ message: "Post deleted successfully" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
