@@ -7,6 +7,7 @@ function auth(req, res, next) {
         req.token = token;
         const verified = jwt.verify(token, process.env.TOKEN_KEY)
         if (verified) {
+            console.log(token);
             next()
         } else {
             // Access Denied 
@@ -16,6 +17,7 @@ function auth(req, res, next) {
     } else {
         // Access Denied 
         return res.status(401).json({ message: 'invaild token' });
+        
 
     }
 }

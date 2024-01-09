@@ -18,6 +18,10 @@ const myScema = new mongoose.Schema(
       enum: ["admin", "editor"],
       default: "editor",  
     },
+    isDeleted: {
+      type: Boolean,
+      default: false // Mark as not deleted by default
+    },
     deviceType: { type: String, default: null },
     token: { type: String, default: null },
   },
