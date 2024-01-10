@@ -82,25 +82,7 @@ const getPostByTitle = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
-// const postService = require("../services/postService");
 
-
-// const getPostByTitle = async (req, res) => {
-//   let title = req.params.title;
-//   const slug = slugify(title, { lower: true });
-
-//   try {
-//     const post = await postService.getPostBySlug(slug);
-
-//     if (post) {
-//       res.status(200).json({ post });
-//     } else {
-//       res.status(404).json({ message: "Post not found" });
-//     }
-//   } catch (error) {
-//     res.status(500).json({ error: error.message });
-//   }
-// };
 
 const getById = async (req, res) => {
   let { id } = req.params.id;
@@ -129,9 +111,6 @@ const getById = async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 };
-
-
-
 
 
 module.exports = {

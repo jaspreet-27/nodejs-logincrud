@@ -16,7 +16,7 @@ const myScema = new mongoose.Schema(
     role: {
       type: String,
       enum: ["admin", "editor"],
-      default: "editor",  
+      default: "admin",  
     },
     isDeleted: {
       type: Boolean,

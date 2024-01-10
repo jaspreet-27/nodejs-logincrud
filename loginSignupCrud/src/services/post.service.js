@@ -5,7 +5,7 @@ const createPost = async (postData) => {
   return await Post.create(postData);
 };
 const getAllPosts = async () => {
-  return await Post.find(); // Retrieve all posts
+  return await Post.find(); 
 };
 
 const getPostById = async (postId) => {
@@ -14,13 +14,11 @@ const getPostById = async (postId) => {
 const updatePostById = async (postId, updatedData) => {
   return await Post.findByIdAndUpdate(postId, updatedData, { new: true });
 };
-// const deletePostById = async (postId) => {
-//   return await Post.findByIdAndDelete(postId);
-// };
+
 const deletePostById = async (postId) => {
   return await Post.findByIdAndUpdate(postId, { isDeleted: true }, { new: true });
 };
-const getPostByTitle = async (title) => {
+const getPostByTitle = async (data) => {
   try {
     // const post = await Post.findOne({ title: { $regex: new RegExp(title, "i") } });
     const criteria = {};  
@@ -32,6 +30,14 @@ const getPostByTitle = async (title) => {
 
     criteria.$or.push({ slug: title })
     const post = await Post.findOne(criteria);
+
+    if (post) {
+      const slug = post.title.toLowerCase().replace(/ /g, "-");
+      post.slug = slug;
+
+    
+      await post.save();
+    }  
     return {
       status : true,
       message : 'success',

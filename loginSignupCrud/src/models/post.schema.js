@@ -11,7 +11,12 @@ const postSchema = new mongoose.Schema({
   userId: { type: mongoose.Types.ObjectId, ref: 'user' },
 
 });
-
+// postSchema.pre('save', function(next) {
+//   if (!this.slug) {
+//     this.slug = this.title.toLowerCase().replace(/ /g, "-");
+//   }
+//   next();
+// });
 const Post = mongoose.model("Post", postSchema);
 module.exports = Post;
 

@@ -4,16 +4,13 @@ function auth(req, res, next) {
     if (typeof bearerHeader !== 'undefined') {
         const bearer = bearerHeader?.split(' ');
         const token = bearer?.[1];
-        req.token = token;
-        const verified = jwt.verify(token, process.env.TOKEN_KEY)
-        if (verified) {
-            console.log(token);
-            next()
-        } else {
-            // Access Denied 
-            return res.status(401).json({ message: 'invaild token' });
-
-        }
+        jwt.verify(token,process.env.TOKEN_KEY, function(err, decoded) {
+            if (err)
+            return res.status(500).send({ auth: false, message: err }); 
+            req.user_id = decoded.user_id;
+            req.email = decoded.email;
+            next();
+          });
     } else {
         // Access Denied 
         return res.status(401).json({ message: 'invaild token' });

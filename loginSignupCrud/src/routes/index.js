@@ -5,7 +5,9 @@ const post = require("../routes/post.routes");
 
 rootRouter.use('/user', user)
 rootRouter.use('/post',post);
-
+rootRouter.use('/*', (req,res)=>{
+    res.send(404);
+});
 
 
  module.exports = rootRouter;
